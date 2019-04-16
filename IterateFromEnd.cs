@@ -15,7 +15,7 @@ namespace IterateFromEndApplication
                 Console.WriteLine("Program will now exit...");
             } else if (!cki.Key.Equals(ConsoleKey.N) && !cki.Key.Equals(ConsoleKey.Y)) {
                 Ask(ref arrLen);
-            } 
+            }
         }
         static void PrintArray(ref int[] arr, int arrLen)
         {
