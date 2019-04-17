@@ -34,7 +34,7 @@ namespace FrequencyOfElementsApplication
                 }
             }
 
-            return maxFrequencyArraySize;
+            return maxFrequencyArraySize + 1;
         }
         static void Ask(ref int arrLen)
         {
@@ -66,7 +66,7 @@ namespace FrequencyOfElementsApplication
 
             int freqArrayLen = GenerateFrequencyArraySize(ref arr, arrLen);
             int[] freqArray = new int[freqArrayLen];
-            DetermineFrequency(ref arr, arrLen, ref freqArray, freqArrayLen);              // THIS LINE FAILS
+            DetermineFrequency(ref arr, arrLen, ref freqArray, freqArrayLen);
             DisplayFrequency(ref freqArray, freqArrayLen);
             Ask(ref arrLen);
         }
