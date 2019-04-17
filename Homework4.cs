@@ -22,6 +22,39 @@ namespace Homework4Application
             }
         }
 
+        static void IsItPrime()
+        {
+
+        }
+
+        static string ReverseString(string palindromeString)
+        {
+            char[] palindromeStringArray = palindromeString.ToCharArray();
+            char[] palindromeStringArrayRev = new char[palindromeStringArray.Length];
+
+            // add string characters in reverse order;
+            for (int i = 0; i < palindromeStringArray.Length; i++)
+            {
+                palindromeStringArrayRev[palindromeStringArray.Length - i - 1] = palindromeStringArray[i];
+            }
+
+            // convert reversed array to string
+            string palindromeStringRev = palindromeStringArrayRev.ToString();
+
+            return palindromeStringRev;
+        }
+
+        static bool CheckPalindrome(string palindromeString)
+        {
+            string palindromeStringRev = ReverseString(palindromeString);
+
+            // compare
+            if (palindromeString.Equals(palindromeStringRev))
+                return true;
+
+            return false;
+        }
+
         static void Palindrome()
         {
             string palindromeString = "";
@@ -32,6 +65,12 @@ namespace Homework4Application
                 Console.WriteLine("THE STRING CANNOT BE BLANK");
                 Palindrome();
             }
+
+            if (CheckPalindrome(palindromeString)) {
+                Console.WriteLine("The string \"{0}\" is a palindrome", palindromeString);
+            } else {
+                Console.WriteLine("The string \"{0}\" is not a palindrome", palindromeString);
+            }
         }
 
         static void RemoveDuplicatesFromLinkedList()
@@ -39,13 +78,14 @@ namespace Homework4Application
 
         }
 
-        static bool CheckString(string duplicateString, int duplicateStringLength)
+        static bool CheckString(string duplicateString)
         {
             bool unique = true;
+            char[] duplicateStringArray = duplicateString.ToCharArray();
 
-            for (int i = 0; i < duplicateStringLength - 1; i++)
+            for (int i = 0; i < duplicateStringArray.Length - 1; i++)
             {
-                for (int j = i+1; j < duplicateStringLength; j++)
+                for (int j = i+1; j < duplicateStringArray.Length; j++)
                 {
                     if (duplicateString[i] == duplicateString[j]) {
                         unique = false;
@@ -66,7 +106,7 @@ namespace Homework4Application
                 UniqueCharacters();
             }
 
-            if (CheckString(duplicateString, duplicateString.Length)) {
+            if (CheckString(duplicateString)) {
                 Console.WriteLine("The string \"{0}\" has unique characters", duplicateString);
             } else {
                 Console.WriteLine("The string \"{0}\" does not have unique characters", duplicateString);
@@ -92,10 +132,10 @@ namespace Homework4Application
         {
             for (int i = 0; i < arrLen; i++)
             {
-                if (i < arr1Len - 1) {
-                    Console.Write(arr1[i] + " ,");
+                if (i < arrLen - 1) {
+                    Console.Write(arr[i] + " ,");
                 } else {
-                    Console.Write(arr1[i]);
+                    Console.Write(arr[i]);
                 }
             }
             Console.WriteLine();
@@ -132,7 +172,8 @@ namespace Homework4Application
 
         static void MergeArrays(ref int[] arr1, int arr1Len, ref int[] arr2, int arr2Len, ref int[] arr3, ref int arr3Len)
         {
-            int i = 0, j = 0, arr3Len = 0;
+            int i = 0, j = 0;
+            arr3Len = 0;
 
             while (i < arr1Len && j < arr2Len)
             {
@@ -170,34 +211,35 @@ namespace Homework4Application
             }
         }
 
-        static int LengthInput()
+        static void LengthInput(ref int arrLen)
         {
-            int arrLen = 0;
             try {
                 arrLen = Convert.ToInt32(Console.ReadLine());
             } catch {
                 Console.WriteLine("INVALID INPUT VALUE! MUST BE A INTEGER!");
-                LengthInput();
+                LengthInput(ref arrLen);
             }
-
-            return arrLen;
         }
-
+        
         static void CommonElements()
         {
+            int lastFailIndex = 0;
+
             // Create first array
             int arr1Len = 0;
             Console.Write("Length of first array: ");
-            arr1Len = LengthInput();
+            LengthInput(ref arr1Len);
             int[] arr1 = new int[arr1Len];
-            ElementsInput(ref arr1, arr1Len);
+            ElementsInput(ref arr1, arr1Len, ref lastFailIndex);
+
+            lastFailIndex = 0;
 
             // Create second array
             int arr2Len = 0;
             Console.Write("Length of second array: ");
-            arr2Len = LengthInput();
+            LengthInput(ref arr2Len);
             int[] arr2 = new int[arr2Len];
-            ElementsInput(ref arr2, arr2Len);
+            ElementsInput(ref arr2, arr2Len, ref lastFailIndex);
 
             // Sort the two arrays
             SortArray(ref arr1, arr1Len);
@@ -205,15 +247,14 @@ namespace Homework4Application
 
             // Merge the two arrays into a third one
             int[] arr3 = new int[200];
-            int[] arr3Len = 0;
+            int arr3Len = 0;
             MergeArrays(ref arr1, arr1Len, ref arr2, arr2Len, ref arr3, ref arr3Len);
 
             // Remove duplicates from third array
-            RemoveDuplicates(ref arr3, arrLen);
+            RemoveDuplicates(ref arr3, ref arr3Len);
 
             // Display the array
             PrintCommonElements(ref arr1, arr1Len, ref arr2, arr2Len, ref arr3, arr3Len);
-            Ask();
         }
 
         static void UserInput()
@@ -221,9 +262,11 @@ namespace Homework4Application
             Console.WriteLine("1 - Common elements between two arrays of integers");
             Console.WriteLine("2 - All unique characters in a string");
             Console.WriteLine("3 - Remove duplicates from an unsorted linked list");
-            Console.WriteLine("4 - Determine if a word is a palindrome");
+            Console.WriteLine("4 - Check if a number is prime");
+            Console.WriteLine("5 - Determine if a word is a palindrome");
+            Console.WriteLine("6 - Exit");
 
-            ConsoleKeyInfo cki = Console.ReadKey();
+            ConsoleKeyInfo cki = Console.ReadKey(true);
 
             if (cki.Key.Equals(ConsoleKey.NumPad1) || cki.Key.Equals(ConsoleKey.D1)) {
                 CommonElements();
@@ -231,8 +274,12 @@ namespace Homework4Application
                 UniqueCharacters();
             } else if (cki.Key.Equals(ConsoleKey.NumPad3) || cki.Key.Equals(ConsoleKey.D3)) {
                 RemoveDuplicatesFromLinkedList();
-            } else if (cki.Key.Equals(ConsoleKey.Numpad4) || cki.Key.Equals(ConsoleKey.D4)) {
+            } else if (cki.Key.Equals(ConsoleKey.NumPad4) || cki.Key.Equals(ConsoleKey.D4)) {
+                IsItPrime();
+            } else if (cki.Key.Equals(ConsoleKey.NumPad5) || cki.Key.Equals(ConsoleKey.D5)) {
                 Palindrome();
+            } else if (cki.Key.Equals(ConsoleKey.NumPad6) || cki.Key.Equals(ConsoleKey.D6)) {
+                Console.WriteLine("Program will now exit...");
             } else {
                 UserInput();
             }
