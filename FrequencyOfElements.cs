@@ -64,9 +64,8 @@ namespace FrequencyOfElementsApplication
                 }
             }
 
-            int[] freqArray = new int[GenerateFrequencyArraySize(ref arr, arrLen)];
-            int freqArrayLen = freqArray.Length;
-            Console.WriteLine(freqArray.Length);
+            int freqArrayLen = GenerateFrequencyArraySize(ref arr, arrLen);
+            int[] freqArray = new int[freqArrayLen];
             DetermineFrequency(ref arr, arrLen, ref freqArray, freqArrayLen);              // THIS LINE FAILS
             DisplayFrequency(ref freqArray, freqArrayLen);
             Ask(ref arrLen);
