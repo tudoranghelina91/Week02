@@ -39,7 +39,7 @@ namespace Homework4Application
             }
 
             // convert reversed array to string
-            string palindromeStringRev = palindromeStringArrayRev.ToString();
+            string palindromeStringRev = new string(palindromeStringArrayRev);
 
             return palindromeStringRev;
         }
@@ -49,7 +49,7 @@ namespace Homework4Application
             string palindromeStringRev = ReverseString(palindromeString);
 
             // compare
-            if (palindromeString.Equals(palindromeStringRev))
+            if (palindromeString.CompareTo(palindromeStringRev) == 0)
                 return true;
 
             return false;
