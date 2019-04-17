@@ -4,7 +4,7 @@ namespace FrequencyOfElementsApplication
 {
     class FrequencyOfElements
     {
-        static void DisplayFrequency(ref int[] freqArray, int freqArrayLen, ref int arrLen)
+        static void DisplayFrequency(ref int[] freqArray, int freqArrayLen)
         {
             for (int i = 0; i < freqArrayLen; i++)
                 if (freqArray[i] > 0) {
@@ -14,8 +14,6 @@ namespace FrequencyOfElementsApplication
                         Console.WriteLine("{0} appears {1} times", i, freqArray[i]);
                     }
                 }
-
-            Ask(ref arrLen);
         }
 
         static void DetermineFrequency(ref int[] arr, int arrLen, ref int[] freqArray, int freqArrayLen)
@@ -69,8 +67,9 @@ namespace FrequencyOfElementsApplication
             int[] freqArray = new int[GenerateFrequencyArraySize(ref arr, arrLen)];
             int freqArrayLen = freqArray.Length;
             Console.WriteLine(freqArray.Length);
-            // DetermineFrequency(ref arr, arrLen, ref freqArray, freqArrayLen);               // THIS LINE FAILS
-            // DisplayFrequency(ref freqArray, freqArrayLen, ref arrLen);
+            DetermineFrequency(ref arr, arrLen, ref freqArray, freqArrayLen);              // THIS LINE FAILS
+            DisplayFrequency(ref freqArray, freqArrayLen);
+            Ask(ref arrLen);
         }
 
         static void LengthInput(ref int arrLen)
