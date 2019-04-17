@@ -133,7 +133,7 @@ namespace Homework4Application
             for (int i = 0; i < arrLen; i++)
             {
                 if (i < arrLen - 1) {
-                    Console.Write(arr[i] + " ,");
+                    Console.Write(arr[i] + " ");
                 } else {
                     Console.Write(arr[i]);
                 }
@@ -156,45 +156,18 @@ namespace Homework4Application
             PrintArray(ref arr3, arr3Len);
         }
 
-        static void RemoveDuplicates(ref int[] arr, ref int arrLen)
-        {
-            for (int i = 0; i < arrLen-1; i++)
-            {
-                if (arr[i] == arr[i+1]) {
-                    for (int j = i + 1; j < arrLen; i++)
-                    {
-                        arr[i] = arr[j];
-                    }
-                    arrLen--;
-                }
-            }
-        }
-
         static void MergeArrays(ref int[] arr1, int arr1Len, ref int[] arr2, int arr2Len, ref int[] arr3, ref int arr3Len)
         {
-            int i = 0, j = 0;
             arr3Len = 0;
 
-            while (i < arr1Len && j < arr2Len)
+            for (int i = 0; i < arr1Len; i++)
             {
-                if (arr1[i] < arr2[j]) {
-                    arr3[arr3Len++] = arr1[i++];
-                } else if (arr2[j] < arr1[i]) {
-                    arr3[arr3Len++] = arr2[j++];
-                } else {
-                    arr3[arr3Len++] = arr1[i++];
-                    arr3[arr3Len++] = arr2[j++];
+                for (int j = 0; j < arr2Len; j++)
+                {
+                    if (arr1[i] == arr2[j]) {
+                        arr3[arr3Len++] = arr1[i];
+                    }
                 }
-            }
-
-            while (i < arr1Len)
-            {
-                arr3[arr3Len++] = arr1[i++];
-            }
-
-            while (j < arr2Len)
-            {
-                arr3[arr3Len++] = arr2[j++];
             }
         }
 
@@ -204,9 +177,11 @@ namespace Homework4Application
             {
                 for (int j = i + 1; j < arrLen; j++)
                 {
-                    arr[i] += arr[j];
-                    arr[j] = arr[i] - arr[j];
-                    arr[i] -= arr[j];
+                    if (arr[i] > arr[j]) {
+                        arr[i] += arr[j];
+                        arr[j] = arr[i] - arr[j];
+                        arr[i] -= arr[j];
+                    }
                 }
             }
         }
@@ -215,9 +190,28 @@ namespace Homework4Application
         {
             try {
                 arrLen = Convert.ToInt32(Console.ReadLine());
+                if (arrLen == 0) {
+                    Console.WriteLine("TYPE AN INTEGER GREATER THAN 0");
+                    LengthInput(ref arrLen);
+                }
             } catch {
                 Console.WriteLine("INVALID INPUT VALUE! MUST BE A INTEGER!");
                 LengthInput(ref arrLen);
+            }
+        }
+
+        static void RemoveDuplicates(ref int[] arr, ref int arrLen)
+        {
+            for (int i = 0; i < arrLen - 1; i++)
+            {
+                if (arr[i] == arr[i+1]) {
+                    for (int j = i + 1; j < arrLen; j++)
+                    {
+                        arr[i] = arr[j];
+                    }
+
+                    arrLen--;
+                }
             }
         }
         
@@ -250,7 +244,7 @@ namespace Homework4Application
             int arr3Len = 0;
             MergeArrays(ref arr1, arr1Len, ref arr2, arr2Len, ref arr3, ref arr3Len);
 
-            // Remove duplicates from third array
+            // Remove duplicates from arr3
             RemoveDuplicates(ref arr3, ref arr3Len);
 
             // Display the array
@@ -283,12 +277,12 @@ namespace Homework4Application
             } else {
                 UserInput();
             }
+            Ask();
         }
 
         static void Main()
         {
             UserInput();
-            Ask();
         }
     }
 }
