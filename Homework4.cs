@@ -6,6 +6,10 @@ namespace Homework4Application
 {
     class Homework4
     {
+        static void Exit()
+        {
+            Console.WriteLine("Program will now exit...");
+        }
         static void Ask()
         {
             Console.WriteLine("Do you want to perform other operations? Y / N");
@@ -75,7 +79,12 @@ namespace Homework4Application
 
         static void RemoveDuplicatesFromLinkedList()
         {
+            LinkedList<int> myList = new LinkedList<int>();
 
+            foreach (int item in myList)
+            {
+                
+            }
         }
 
         static bool CheckString(string duplicateString)
@@ -264,20 +273,24 @@ namespace Homework4Application
 
             if (cki.Key.Equals(ConsoleKey.NumPad1) || cki.Key.Equals(ConsoleKey.D1)) {
                 CommonElements();
+                Ask();
             } else if (cki.Key.Equals(ConsoleKey.NumPad2) || cki.Key.Equals(ConsoleKey.D2)) {
                 UniqueCharacters();
+                Ask();
             } else if (cki.Key.Equals(ConsoleKey.NumPad3) || cki.Key.Equals(ConsoleKey.D3)) {
                 RemoveDuplicatesFromLinkedList();
+                Ask();
             } else if (cki.Key.Equals(ConsoleKey.NumPad4) || cki.Key.Equals(ConsoleKey.D4)) {
                 IsItPrime();
+                Ask();
             } else if (cki.Key.Equals(ConsoleKey.NumPad5) || cki.Key.Equals(ConsoleKey.D5)) {
                 Palindrome();
+                Ask();
             } else if (cki.Key.Equals(ConsoleKey.NumPad6) || cki.Key.Equals(ConsoleKey.D6)) {
-                Console.WriteLine("Program will now exit...");
+                Exit();
             } else {
                 UserInput();
             }
-            Ask();
         }
 
         static void Main()
