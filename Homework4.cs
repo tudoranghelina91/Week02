@@ -109,18 +109,12 @@ namespace Homework4Application
 
         static void RemoveDuplicatesFromLinkedList()
         {
-            LinkedList<int> myList = new LinkedList<int>();
-
-            foreach (int item in myList)
-            {
-                
-            }
+            
         }
 
         static bool CheckString(string duplicateString)
         {
             bool unique = true;
-            // char[] duplicateStringArray = duplicateString.ToCharArray();
 
             for (int i = 0; i < duplicateString.Length - 1; i++)
             {
