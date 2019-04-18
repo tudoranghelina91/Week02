@@ -20,15 +20,45 @@ namespace Homework4Application
                 UserInput();
             } else if (cki.Key.Equals(ConsoleKey.N)) {
                 Console.WriteLine();
-                Console.WriteLine("Program will now exit...");
+                Exit();
             } else {
                 Ask();
             }
         }
 
+        static bool CheckPrime(int x)
+        {
+            bool prime = true;
+
+            if (x == 0 || x == 1) {
+                prime = false;
+            } else if (x % 2 == 0 && x != 2) {
+                prime = false;
+            } else {
+                for (int i = 3; i <= Math.Sqrt((double)x); i += 2)
+                {
+                    if (x % i == 0) {
+                        prime = false;
+                    }
+                }
+            }
+            return prime;
+        }
+
         static void IsItPrime()
         {
-
+            Console.Write("Type in a number to check if it is prime or not: ");
+            try {
+                int x = Convert.ToInt32(Console.ReadLine());
+                if(CheckPrime(x)) {
+                    Console.WriteLine("{0} is a prime number", x);
+                } else {
+                    Console.WriteLine("{0} is not a prime number", x);
+                }
+            } catch {
+                Console.WriteLine("INVALID INPUT VALUE. PLEASE USE AN INTEGER!");
+                IsItPrime();
+            }
         }
 
         static string ReverseString(string palindromeString)
@@ -53,7 +83,7 @@ namespace Homework4Application
             string palindromeStringRev = ReverseString(palindromeString);
 
             // compare
-            if (palindromeString.CompareTo(palindromeStringRev) == 0)
+            if (palindromeString.ToLower().CompareTo(palindromeStringRev.ToLower()) == 0)
                 return true;
 
             return false;
@@ -90,11 +120,11 @@ namespace Homework4Application
         static bool CheckString(string duplicateString)
         {
             bool unique = true;
-            char[] duplicateStringArray = duplicateString.ToCharArray();
+            // char[] duplicateStringArray = duplicateString.ToCharArray();
 
-            for (int i = 0; i < duplicateStringArray.Length - 1; i++)
+            for (int i = 0; i < duplicateString.Length - 1; i++)
             {
-                for (int j = i+1; j < duplicateStringArray.Length; j++)
+                for (int j = i+1; j < duplicateString.Length; j++)
                 {
                     if (duplicateString[i] == duplicateString[j]) {
                         unique = false;
@@ -161,8 +191,12 @@ namespace Homework4Application
             PrintArray(ref arr2, arr2Len);
 
             // Print third array
-            Console.Write("Common Elements: ");
-            PrintArray(ref arr3, arr3Len);
+            if (arr3Len != 0) {
+                Console.Write("Common Elements: ");
+                PrintArray(ref arr3, arr3Len);
+            } else {
+                Console.WriteLine("The two arrays don't have common elements");
+            }
         }
 
         static void MergeArrays(ref int[] arr1, int arr1Len, ref int[] arr2, int arr2Len, ref int[] arr3, ref int arr3Len)
