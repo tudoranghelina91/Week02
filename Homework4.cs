@@ -107,37 +107,75 @@ namespace Homework4Application
             }
         }
 
+        static void LinkedListPrint(LinkedList<int> myList)
+        {
+            // Print the linked list after the elements have been removed elements
+            foreach (int node in myList)
+            {
+                Console.WriteLine(node);
+            }
+        }
+
+        static void LinkedListDuplicateRemoval(ref LinkedList<int> myList)
+        {
+            // create node and associate to list
+            LinkedListNode<int> llNode = myList.First;
+
+            // Remove duplicates
+            while (llNode != null)
+            {
+                LinkedListNode<int> llNode2 = llNode.Next;
+                while (llNode2 != null)
+                {
+                    if (llNode2.Value == llNode.Value) {
+                        myList.Remove(llNode2);
+                    }
+                    llNode2 = llNode2.Next;
+                }
+                llNode = llNode.Next;
+            }
+        }
+
+        static void LinkedListInput(int n, ref int lastFailIndex, ref LinkedList<int> myList)
+        {
+            // Read values into the linked list
+            for (int i = lastFailIndex; i < n; i++)
+            {
+                try {
+                    Console.Write("Element {0}: ", i);
+                    int x = Convert.ToInt32(Console.ReadLine());
+                    myList.AddFirst(x);
+                } catch {
+                    Console.WriteLine("INVALID INPUT! USE INTEGERS!");
+                    lastFailIndex = i--;
+                }
+            }
+        }
+
+        static void ListLengthInput(ref int n)
+        {
+            try {
+                // Type numbers of elements to add into the linked list
+                Console.Write("How many elements do you want to add to the list: ");
+                n = Convert.ToInt32(Console.ReadLine());
+            } catch {
+                Console.WriteLine("INVALID INPUT! USE INTEGERS ONLY!");
+                ListLengthInput(ref n);
+            }
+        }
+
         static void RemoveDuplicatesFromLinkedList()
         {
-            // Type numbers of elements to add into the linked list
-            Console.Write("How many elements do you want to add to the list: ");
-            int n = Convert.ToInt32(Console.ReadLine());
+            int n = 0;
+            int lastFailIndex = 0;
+            ListLengthInput(ref n);
 
             // create a new linked list
             LinkedList<int> myList = new LinkedList<int>();
+            LinkedListInput(n, ref lastFailIndex, ref myList);
 
-            // Read values into the linked list
-            for (int i = 0; i < n; i++)
-            {
-                Console.Write("Element {0}: ", i);
-                int x = Convert.ToInt32(Console.ReadLine());
-                myList.AddFirst(x);
-            }
-
-            // Remove duplicates
-            foreach (int node in myList)
-            {
-                
-            }
-
-            Console.WriteLine();
-            // Print linkedlist
-            int elemIndex = 1;
-            foreach (int node in myList)
-            {
-                Console.WriteLine("Element {0}: {1}", elemIndex, node);
-                elemIndex++;
-            }
+            LinkedListDuplicateRemoval(ref myList);
+            LinkedListPrint(myList);
         }
 
         static bool CheckString(string duplicateString)
