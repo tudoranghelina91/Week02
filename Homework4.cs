@@ -109,7 +109,35 @@ namespace Homework4Application
 
         static void RemoveDuplicatesFromLinkedList()
         {
-            
+            // Type numbers of elements to add into the linked list
+            Console.Write("How many elements do you want to add to the list: ");
+            int n = Convert.ToInt32(Console.ReadLine());
+
+            // create a new linked list
+            LinkedList<int> myList = new LinkedList<int>();
+
+            // Read values into the linked list
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write("Element {0}: ", i);
+                int x = Convert.ToInt32(Console.ReadLine());
+                myList.AddFirst(x);
+            }
+
+            // Remove duplicates
+            foreach (int node in myList)
+            {
+                
+            }
+
+            Console.WriteLine();
+            // Print linkedlist
+            int elemIndex = 1;
+            foreach (int node in myList)
+            {
+                Console.WriteLine("Element {0}: {1}", elemIndex, node);
+                elemIndex++;
+            }
         }
 
         static bool CheckString(string duplicateString)
