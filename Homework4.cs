@@ -110,9 +110,12 @@ namespace Homework4Application
         static void LinkedListPrint(LinkedList<int> myList)
         {
             // Print the linked list after the elements have been removed elements
+            int elementCount = 1;
+            Console.WriteLine("Values inside the linked list after duplicates have been removed...");
             foreach (int node in myList)
             {
-                Console.WriteLine(node);
+                Console.WriteLine("Element {0}: {1}", elementCount, node);
+                elementCount++;
             }
         }
 
