@@ -1,8 +1,8 @@
 using System;
 
-namespace Homework3Application
+namespace Homework2Application
 {
-    class Homework3
+    class Homework2
     {
         static void DisplayFrequency(ref int[] freqArray, int freqArrayLen)
         {
