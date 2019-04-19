@@ -1,8 +1,8 @@
 using System;
 
-namespace FizzBuzzApplication
+namespace Homework2Application
 {
-    class FizzBuzz
+    class Homework2
     {
         static void Main()
         {
