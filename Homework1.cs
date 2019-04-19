@@ -1,8 +1,8 @@
 using System;
 
-namespace Homework2Application
+namespace Homework1Application
 {
-    class Homework2
+    class Homework1
     {
         static void Main()
         {
