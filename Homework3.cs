@@ -1,8 +1,8 @@
 using System;
 
-namespace Homework1Application
+namespace Homework3Application
 {
-    class Homework1
+    class Homework3
     {
         static void PrintEvenOddArrays(ref int[] evenArr, int evenArrLen, ref int[] oddArr, int oddArrLen, ref int arrLen)
         {
