@@ -1,8 +1,8 @@
 using System;
 
-namespace FrequencyOfElementsApplication
+namespace Homework3Application
 {
-    class FrequencyOfElements
+    class Homework3
     {
         static void DisplayFrequency(ref int[] freqArray, int freqArrayLen)
         {
