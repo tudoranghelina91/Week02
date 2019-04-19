@@ -11,7 +11,7 @@ namespace Exercise10Application
 
         static void Ask(ref int arrLen)
         {
-            Console.WriteLine("Do you want to calculate the average of another array's elements? Y - Yes, N - No");
+            Console.WriteLine("Do you want to find the index of another array's element? Y - Yes, N - No");
             ConsoleKeyInfo cki = Console.ReadKey(true);
 
             if (cki.Key.Equals(ConsoleKey.Y)) {
@@ -23,29 +23,28 @@ namespace Exercise10Application
             }
         }
 
-        PrintArrOfIndexes(int[] arrOfIndexes, int arrOfIndexesLen)
+        static void PrintArrOfIndexes(ref int[] arrOfIndexes, int arrOfIndexesLen)
         {
             if (arrOfIndexesLen != 0) {
+                Console.Write("The element that you requested is located at the following positions: ");
                 for (int i = 0; i < arrOfIndexesLen; i++)
                 {
-                    Console.Write("The element that you requested is located at the following positions: ");
                     Console.Write(arrOfIndexes[i] + " ");
                 }
+                Console.WriteLine();
             } else {
                 Console.WriteLine("No such element could be found in the array");
             }
         }
 
-        static void FindIndex (int index, int arrValue, ref int[] arr, int arrLen)
+        static void FindIndex (int index, int arrValue, ref int[] arr, ref int[] arrOfIndexes, int arrLen, ref int arrOfIndexesLen)
         {
-            int[] arrOfIndexes = new int[arrLen];
-            int arrOfIndexesLen = 0;
-
             for (int i = 0; i < arrLen; i++)
             {
                 if (arr[i] == arrValue)
                 {
-                    arrOfIndexes[arrOfIndexesLen++] = i;
+                    arrOfIndexes[arrOfIndexesLen] = i;
+                    arrOfIndexesLen++;
                 }
             }
         }
@@ -79,8 +78,9 @@ namespace Exercise10Application
         static void LengthInput(ref int arrLen)
         {
             int[] arr = new int[100];
+            int[] arrOfIndexes = new int[100];
             int lastFailIndex = 0;
-            int arrLen = 0;
+            int arrOfIndexesLen = 0;
             int index = 0;
             int arrValue = 0;
 
@@ -89,7 +89,8 @@ namespace Exercise10Application
                 arrLen = Convert.ToInt32(Console.ReadLine());
                 ElementsInput(ref arr, arrLen, ref lastFailIndex);
                 ReadElement(ref index, ref arrValue);
-                FindIndex();
+                FindIndex(index, arrValue, ref arr, ref arrOfIndexes, arrLen, ref arrOfIndexesLen);
+                PrintArrOfIndexes(ref arrOfIndexes, arrOfIndexesLen);
                 Ask(ref arrLen);
             } catch {
                 Console.WriteLine("INVALID INPUT! LENGTH MUST BE AN INTEGER");
@@ -99,7 +100,8 @@ namespace Exercise10Application
 
         static void Main()
         {
-            LengthInput();
+            int arrLen = 0;
+            LengthInput(ref arrLen);
         }
     }
 }
