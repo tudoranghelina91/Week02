@@ -25,7 +25,7 @@ namespace ExtraHomeworkApplication
 
         static string SplitString(string s)
         {
-            char[] separators = new char[] { ' ', ',', '\t', ';',','};
+            char[] separators = new char[] { ' ', ',', '\t', ';','.','?','\n','!'};
             string[] words = new string[s.Length];
             words = s.Split(separators, StringSplitOptions.RemoveEmptyEntries);
             string lastWord = "";
